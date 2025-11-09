@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veille Technologique - BOUTEBA Marwane</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #2563eb; --secondary: #1e40af; --accent: #3b82f6;
+            --dark: #1e293b; --light: #f8fafc; --gray: #64748b;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--dark); background: var(--light); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        /* Navigation */
+        nav { background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        nav .container { padding: 1rem 30px !important; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+        .back-link { text-decoration: none; color: var(--primary); font-weight: 500; display: flex; align-items: center; gap: .5rem; transition: color .3s; }
+        .back-link:hover { color: var(--secondary); }
+
+        /* Hero */
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; padding: 5rem 0; text-align: center; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; inset: 0; background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>'); opacity: .3; }
+        .hero-content { position: relative; z-index: 1; }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+        .hero p { font-size: 1.3rem; opacity: .95; max-width: 700px; margin: 0 auto; }
+
+        /* Section */
+        section { padding: 5rem 0; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: var(--dark); position: relative; padding-bottom: 1rem; }
+        .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background: var(--primary); border-radius: 2px; }
+
+        /* Intro Box */
+        .intro-box { max-width: 900px; margin: 0 auto 4rem; background: white; padding: 3rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); }
+        .intro-box h3 { color: var(--primary); margin-bottom: 1.5rem; font-size: 1.8rem; }
+        .intro-box p { font-size: 1.1rem; line-height: 1.8; color: var(--gray); margin-bottom: 1rem; }
+        .intro-box strong { color: var(--dark); }
+
+        /* Sources */
+        .sources-box { background: var(--light); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--primary); margin-top: 2rem; }
+        .sources-box h4 { color: var(--primary); margin-bottom: 1rem; }
+        .sources-tags { display: flex; flex-wrap: wrap; gap: .5rem; }
+        .source-tag { background: white; color: var(--primary); padding: .4rem 1rem; border-radius: 20px; font-size: .9rem; font-weight: 600; border: 1px solid var(--primary); }
+
+        /* Example Cards */
+        .example-card { background: white; padding: 3rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); margin-bottom: 3rem; }
+        .example-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; }
+        .example-icon { width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: white; flex-shrink: 0; }
+        .example-title { font-size: 2rem; font-weight: 700; color: var(--dark); }
+        
+        .context-section { background: var(--light); padding: 2rem; border-radius: 10px; margin-bottom: 2rem; }
+        .context-section h4 { color: var(--primary); margin-bottom: 1rem; font-size: 1.3rem; }
+        .context-section p { color: var(--gray); line-height: 1.8; }
+
+        .retenu-list { margin: 2rem 0; }
+        .retenu-list h4 { color: var(--dark); margin-bottom: 1rem; font-size: 1.3rem; }
+        .retenu-list ul { list-style: none; padding: 0; }
+        .retenu-list li { background: var(--light); padding: 1rem 1.5rem; border-radius: 8px; margin-bottom: .8rem; border-left: 3px solid var(--primary); }
+        .retenu-list li strong { color: var(--primary); }
+
+        .action-box { background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(139, 92, 246, 0.1)); padding: 2rem; border-radius: 10px; margin-bottom: 2rem; }
+        .action-box h4 { color: var(--primary); margin-bottom: 1rem; font-size: 1.3rem; }
+        .action-box p { color: var(--dark); line-height: 1.8; margin-bottom: .8rem; }
+        .action-box ol { margin-left: 1.5rem; color: var(--gray); }
+        .action-box ol li { margin-bottom: .5rem; }
+
+        .result-box { background: var(--primary); color: white; padding: 1.5rem 2rem; border-radius: 10px; display: flex; align-items: center; gap: 1rem; }
+        .result-box i { font-size: 2rem; }
+        .result-box strong { display: block; font-size: 1.2rem; margin-bottom: .3rem; }
+
+        /* Conclusion */
+        .conclusion-section { background: white; }
+        .conclusion-box { max-width: 900px; margin: 0 auto; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 3rem; border-radius: 15px; text-align: center; }
+        .conclusion-box h3 { font-size: 2rem; margin-bottom: 1.5rem; }
+        .conclusion-box p { font-size: 1.15rem; line-height: 1.8; opacity: .95; }
+
+        /* Stats */
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 3rem 0; }
+        .stat-card { background: white; padding: 2rem; border-radius: 15px; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.08); }
+        .stat-icon { font-size: 3rem; color: var(--primary); margin-bottom: 1rem; }
+        .stat-value { font-size: 2.5rem; font-weight: bold; color: var(--primary); margin-bottom: .5rem; }
+        .stat-label { color: var(--gray); font-size: .95rem; }
+
+        /* CTA */
+        .cta-section { background: var(--dark); color: white; text-align: center; padding: 5rem 0; }
+        .cta-section h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .cta-section p { font-size: 1.2rem; margin-bottom: 2rem; opacity: .9; }
+        .cta-button { display: inline-block; background: var(--primary); color: white; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: bold; transition: transform .3s, box-shadow .3s; }
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+
+        footer { background: #0f172a; color: white; text-align: center; padding: 2rem 0; }
+        footer a { color: white; }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 15px; }
+            nav .container { padding: 1rem 15px !important; }
+            .hero h1 { font-size: 2rem; }
+            .example-header { flex-direction: column; text-align: center; }
+            .intro-box, .example-card { padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="logo">Veille Technologique</div>
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Retour au portfolio</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content container">
+            <h1><i class="fas fa-search"></i> Veille Technologique</h1>
+            <p>Cybersécurité et Virtualisation/Cloud : rester informé pour mieux protéger et optimiser</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">Introduction</h2>
+            <div class="intro-box">
+                <h3>Mes domaines de veille</h3>
+                <p>Mes deux types de veille ont été ciblés sur la <strong>cybersécurité</strong> (ensemble des pratiques et outils pour protéger les systèmes, réseaux et données contre les attaques) et la <strong>virtualisation & cloud</strong> (techniques permettant de créer des machines virtuelles ou d'exécuter des services sur des infrastructures distantes, comme Azure ou AWS, pour plus de flexibilité et d'évolutivité).</p>
+                
+                <div class="sources-box">
+                    <h4><i class="fas fa-rss"></i> Sources suivies</h4>
+                    <div class="sources-tags">
+                        <span class="source-tag">Google Alertes</span>
+                        <span class="source-tag">CERT-FR</span>
+                        <span class="source-tag">ZATAZ</span>
+                        <span class="source-tag">IT-Connect</span>
+                        <span class="source-tag">Reddit r/sysadmin</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background: white;">
+        <div class="container">
+            <h2 class="section-title">Exemple 1 – Cybersécurité</h2>
+            
+            <div class="example-card">
+                <div class="example-header">
+                    <div class="example-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3 class="example-title">Ransomware LockBit 4.0</h3>
+                </div>
+
+                <div class="context-section">
+                    <h4>Contexte observé</h4>
+                    <p>En novembre 2025, le ransomware <strong>LockBit 4.0</strong> a refait surface. Il se propage via des e-mails frauduleux imitant des factures de fournisseurs habituels. Une fois le fichier joint ouvert, il chiffre les données et demande une rançon (vu sur ZATAZ et alerte Google « ransomware PME »).</p>
+                </div>
+
+                <div class="retenu-list">
+                    <h4>Ce que j'ai retenu :</h4>
+                    <ul>
+                        <li><strong>Le phishing reste la porte d'entrée n°1</strong> (82 % des attaques selon les rapports).</li>
+                        <li><strong>Le MFA</strong> (authentification multifacteur : mot de passe + code sur téléphone ou appli) bloque 99 % des comptes compromis.</li>
+                        <li><strong>Le chiffrement des données au repos</strong> (via BitLocker sur Windows ou LUKS sur Linux) rend les données illisibles même si volées.</li>
+                    </ul>
+                </div>
+
+                <div class="action-box">
+                    <h4><i class="fas fa-tools"></i> Application pratique</h4>
+                    <p>Ces bonnes pratiques peuvent être appliquées dans n'importe quelle infrastructure d'entreprise pour renforcer significativement la sécurité face aux ransomwares et tentatives de phishing.</p>
+                </div>
+
+                <div class="result-box">
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <strong>Impact</strong>
+                        <span>Protection renforcée contre 99% des attaques par phishing grâce au MFA.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="stat-value">82%</div>
+                    <div class="stat-label">Attaques par phishing</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-lock"></i></div>
+                    <div class="stat-value">99%</div>
+                    <div class="stat-label">Protection via MFA</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Données chiffrées</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">Exemple 2 – Virtualisation & Cloud</h2>
+            
+            <div class="example-card">
+                <div class="example-header">
+                    <div class="example-icon"><i class="fas fa-cloud"></i></div>
+                    <h3 class="example-title">Proxmox 8.3 - Backup incrémental</h3>
+                </div>
+
+                <div class="context-section">
+                    <h4>Contexte observé</h4>
+                    <p>Proxmox 8.3 est sorti avec une amélioration majeure : le <strong>backup incrémental natif sur ZFS</strong>. Au lieu de recopier tout un backup à chaque fois, il ne sauvegarde que les modifications (découvert sur IT-Connect et confirmé par des retours sur Reddit r/sysadmin).</p>
+                </div>
+
+                <div class="retenu-list">
+                    <h4>Ce que j'ai retenu :</h4>
+                    <ul>
+                        <li>Un backup complet de <strong>500 Go prenait 45 min</strong> avec Veeam.</li>
+                        <li>Avec Proxmox 8.3 + ZFS incrémental : <strong>8 min seulement</strong> pour le même volume.</li>
+                        <li><strong>Proxmox est open-source</strong> → zéro coût de licence, contrairement à VMware ou Veeam.</li>
+                    </ul>
+                </div>
+
+                <div class="action-box">
+                    <h4><i class="fas fa-cogs"></i> Potentiel d'application</h4>
+                    <p>Proxmox représente une alternative open-source performante qui pourrait réduire significativement les coûts de licence tout en améliorant les performances de backup.</p>
+                </div>
+
+                <div class="result-box">
+                    <i class="fas fa-euro-sign"></i>
+                    <div>
+                        <strong>Avantage économique</strong>
+                        <span>Économie potentielle : zéro coût de licence + gain de temps considérable.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                    <div class="stat-value">45 min</div>
+                    <div class="stat-label">Backup Veeam (500 Go)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    <div class="stat-value">8 min</div>
+                    <div class="stat-label">Backup Proxmox (500 Go)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-coins"></i></div>
+                    <div class="stat-value">0€</div>
+                    <div class="stat-label">Licence Proxmox</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="conclusion-section">
+        <div class="container">
+            <h2 class="section-title">Conclusion</h2>
+            <div class="conclusion-box">
+                <h3><i class="fas fa-lightbulb"></i> L'importance de la veille</h3>
+                <p>La veille technologique est indispensable en informatique : elle permet de détecter rapidement les nouvelles menaces, de tester des solutions performantes et gratuites, et de transformer une information en gain réel pour l'entreprise (sécurité renforcée, coûts réduits, temps optimisé).</p>
+                <p style="margin-top: 1.5rem; font-size: 1.3rem; font-weight: 600;">1 h par semaine suffit pour rester à jour et proposer des améliorations concrètes.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Découvrez mes autres compétences</h2>
+            <p>Explorez mes projets en infrastructure réseau et virtualisation</p>
+            <a href="index.html#projets" class="cta-button">Voir mes projets</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 BOUTEBA Marwane - BTS SIO SISR | <a href="mailto:marwane.bouteba@exemple.com">marwane.bouteba@exemple.com</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>

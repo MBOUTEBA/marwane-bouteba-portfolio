@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio de Marwane Bouteba, étudiant en BTS SIO SISR. Projets en réseaux, virtualisation, cybersécurité.">
+    <meta property="og:title" content="BOUTEBA Marwane - BTS SIO SISR">
+    <meta property="og:description" content="Étudiant passionné par les infrastructures et la sécurité informatique.">
+    <meta property="og:image" content="images/preview.jpg">
+    <meta property="og:url" content="https://votre-site.com">
+    <title>BOUTEBA Marwane - Portfolio BTS SIO SISR</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #2563eb; --secondary: #1e40af; --accent: #3b82f6;
+            --dark: #1e293b; --light: #f8fafc; --gray: #64748b; --success: #10b981;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--dark); background: var(--light); }
+
+        /* MARGES PARFAITES */
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 30px; 
+        }
+
+        /* Navigation : même marge */
+        nav { 
+            background: white; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            transition: all .3s ease; 
+        }
+        nav .container { 
+            padding: 1rem 30px !important; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 500; transition: color .3s; font-size: .95rem; }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Hero */
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; padding: 6rem 0; text-align: center; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; inset: 0; background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>'); opacity: .3; }
+        .hero-content { position: relative; z-index: 1; }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; animation: fadeInUp .8s ease; }
+        .hero .subtitle { font-size: 1.3rem; margin-bottom: 2rem; opacity: .95; animation: fadeInUp 1s ease; max-width: 700px; margin: 0 auto 2rem; }
+        .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeInUp 1.2s ease; }
+        .cta-button { display: inline-block; background: white; color: var(--primary); padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: bold; transition: transform .3s, box-shadow .3s; }
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,.2); }
+        .cta-button.secondary { background: transparent; color: white; border: 2px solid white; }
+        .cta-button.secondary:hover { background: white; color: var(--primary); }
+
+        /* Sections */
+        section { padding: 5rem 0; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: var(--dark); position: relative; padding-bottom: 1rem; }
+        .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background: var(--primary); border-radius: 2px; }
+
+        .read-more { text-align: center; margin-top: 1.5rem; }
+        .read-more a { color: var(--primary); font-weight: 500; text-decoration: none; font-size: 1rem; }
+        .read-more a:hover { text-decoration: underline; }
+
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .skill-category h3 { color: var(--primary); margin-bottom: .8rem; font-size: 1.3rem; }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: .5rem; }
+        .skill-tag { background: #e0e7ff; color: var(--primary); padding: .4rem .9rem; border-radius: 20px; font-size: .85rem; font-weight: 500; }
+
+        .bts-content { max-width: 800px; margin: 0 auto; text-align: center; }
+        .bts-content p { font-size: 1.1rem; line-height: 1.8; color: var(--gray); margin-bottom: 1.5rem; }
+
+        .school-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .school-card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,.08); transition: transform .3s, box-shadow .3s; }
+        .school-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,.15); }
+        .school-year { background: var(--primary); color: white; padding: .5rem 1rem; border-radius: 20px; display: inline-block; margin-bottom: 1rem; font-weight: bold; }
+
+        .parcours { background: white; }
+        .timeline { position: relative; max-width: 900px; margin: 0 auto; }
+        .timeline::before { content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 4px; height: 100%; background: var(--primary); }
+        .timeline-item { display: flex; margin-bottom: 3rem; position: relative; }
+        .timeline-item:nth-child(odd) { flex-direction: row-reverse; }
+        .timeline-content { background: var(--light); padding: 1.5rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,.1); width: calc(50% - 30px); position: relative; }
+        .timeline-date { background: var(--primary); color: white; padding: .5rem 1rem; border-radius: 20px; display: inline-block; margin-bottom: .5rem; font-weight: bold; font-size: .9rem; }
+        .timeline-title { font-size: 1.3rem; margin-bottom: .5rem; color: var(--dark); }
+        .timeline-description { color: var(--gray); line-height: 1.7; }
+
+        .company-content { max-width: 900px; margin: 0 auto; background: white; padding: 3rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,.08); }
+        .company-logo { width: 150px; height: 150px; margin: 0 auto 1rem; border-radius: 50%; overflow: hidden; }
+        .company-logo img { width: 100%; height: 100%; object-fit: cover; }
+        .company-name { font-size: 2rem; color: var(--primary); margin-bottom: 1rem; }
+        .company-content p { font-size: 1.1rem; line-height: 1.8; color: var(--gray); }
+
+        .projects { background: white; }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .project-card { background: var(--light); border-radius: 15px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,.08); transition: transform .3s, box-shadow .3s; }
+        .project-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,.15); }
+        .project-image { width: 100%; height: 200px; background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white; overflow: hidden; }
+        .project-image img { width: 100%; height: 100%; object-fit: cover; }
+        .project-image i { position: absolute; color: white; font-size: 4rem; }
+        .project-content { padding: 1.5rem; }
+        .project-title { font-size: 1.5rem; margin-bottom: .5rem; color: var(--dark); }
+        .project-description { color: var(--gray); line-height: 1.7; }
+
+        .veille-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .veille-card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,.08); transition: transform .3s, box-shadow .3s; }
+        .veille-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,.15); }
+        .veille-icon { font-size: 3rem; margin-bottom: 1rem; color: var(--primary); display: block; }
+        .veille-card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--dark); }
+        .veille-card p { color: var(--gray); line-height: 1.7; margin-bottom: 1rem; }
+        .veille-tools { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+        .tool-tag { background: var(--primary); color: white; padding: .3rem .8rem; border-radius: 20px; font-size: .85rem; }
+
+        .contact { background: var(--dark); color: white; }
+        .contact .section-title { color: white; }
+        .contact-content { max-width: 600px; margin: 0 auto; }
+        .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+        .form-group { display: flex; flex-direction: column; gap: .5rem; }
+        .form-group label { font-weight: bold; }
+        .form-group input, .form-group textarea { padding: 1rem; border: none; border-radius: 8px; font-family: inherit; font-size: 1rem; }
+        .form-group textarea { min-height: 150px; resize: vertical; }
+        .submit-btn { background: var(--primary); color: white; padding: 1rem 2rem; border: none; border-radius: 50px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background .3s, transform .3s; }
+        .submit-btn:hover { background: var(--secondary); transform: translateY(-2px); }
+
+        footer { background: #0f172a; color: white; text-align: center; padding: 2rem 0; }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 15px; }
+            nav .container { padding: 1rem 15px !important; }
+            .hero h1 { font-size: 2rem; }
+            .timeline::before { left: 20px; }
+            .timeline-item { flex-direction: column !important; }
+            .timeline-content { width: calc(100% - 50px); margin-left: 50px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav aria-label="Navigation principale">
+        <div class="container">
+            <div class="logo">BOUTEBA Marwane</div>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#competences">Compétences</a></li>
+                <li><a href="#mon-bts">Mon BTS</a></li>
+                <li><a href="#mon-ecole">Mon école</a></li>
+                <li><a href="#parcours">Parcours</a></li>
+                <li><a href="#entreprise">Entreprise</a></li>
+                <li><a href="#projets">Projets</a></li>
+                <li><a href="#veilles">Veilles</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="accueil" class="hero">
+        <div class="hero-content container">
+            <h1>BOUTEBA Marwane</h1>
+            <p class="subtitle">Étudiant en BTS SIO option SISR. Passionné par les systèmes, réseaux et la cybersécurité.</p>
+            <div class="hero-buttons">
+                <a href="documents/Marwane BOUTEBA - Technicien Informatique.pdf" class="cta-button" download>Mon CV</a>
+                <a href="documents/Tableau de synthèse Marwane BOUTEBA.pdf" class="cta-button secondary" download>Fiche de synthèse</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compétences -->
+    <section id="competences">
+        <div class="container">
+            <h2 class="section-title">Compétences Techniques</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Réseaux</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">TCP/IP</span>
+                        <span class="skill-tag">VLAN</span>
+                        <span class="skill-tag">DHCP/DNS</span>
+                        <span class="skill-tag">Wi-Fi Enterprise</span>
+                        <span class="skill-tag">Cisco</span>
+                        <span class="skill-tag">Unifi</span>
+                        <span class="skill-tag">Fortinet</span>
+                        <span class="skill-tag">pfSense</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Sécurité</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Firewall</span>
+                        <span class="skill-tag">Cryptage</span>
+                        <span class="skill-tag">Veille sécurité</span>
+                        <span class="skill-tag">Bonnes pratiques</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Virtualisation</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">VMware ESXi</span>
+                        <span class="skill-tag">Docker</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Systèmes</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Windows Server</span>
+                        <span class="skill-tag">Active Directory</span>
+                        <span class="skill-tag">PowerShell</span>
+                        <span class="skill-tag">Linux Debian</span>
+                        <span class="skill-tag">Kali Linux</span>
+                        <span class="skill-tag">Linux Mint</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BTS -->
+    <section id="mon-bts">
+        <div class="container">
+            <h2 class="section-title">Mon BTS SIO SISR</h2>
+            <div class="bts-content">
+                <p>Je prépare un BTS Services Informatiques aux Organisations, option SISR (Solutions d'Infrastructure, Systèmes et Réseaux). Cette formation me permet d'acquérir des compétences pratiques en administration réseau, virtualisation, sécurité et gestion d'infrastructures informatiques, tout en développant une approche professionnelle adaptée aux entreprises.</p>
+            </div>
+            <div class="read-more">
+                <a href="https://www.onisep.fr/ressources/univers-formation/formations/post-bac/bts-services-informatiques-aux-organisations-option-a-solutions-d-infrastructure-systemes-et-reseaux">En savoir plus</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- École -->
+    <section id="mon-ecole">
+        <div class="container">
+            <h2 class="section-title">Mon école</h2>
+            <div class="school-cards">
+                <div class="school-card">
+                    <span class="school-year">1ère année</span>
+                    <h3>Elysées Apprentissage</h3>
+                    <p>Cette école m'a permis de découvrir le monde professionnel informatique et de consolider mes bases en systèmes et réseaux.</p>
+                </div>
+                <div class="school-card">
+                    <span class="school-year">2ème année</span>
+                    <h3>IAAG Paris 19ème</h3>
+                    <p>Cette école m'a permis de renforcer mes compétences techniques, de travailler sur des projets concrets et de me préparer à l'entrée dans le monde professionnel.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parcours -->
+    <section id="parcours" class="parcours">
+        <div class="container">
+            <h2 class="section-title">Mon parcours scolaire</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">2018 – 2021</span>
+                        <h3 class="timeline-title">Baccalauréat Général</h3>
+                        <p class="timeline-description">Lycée Julie-Victoire Daubié, Argenteuil — Spécialités Mathématiques, Physique-Chimie et SVT.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">2021 – 2023</span>
+                        <h3 class="timeline-title">Licence 1 Économie et Gestion</h3>
+                        <p class="timeline-description">CY Paris Cergy Université — Bases solides en microéconomie, macroéconomie, comptabilité et mathématiques.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">Actuellement</span>
+                        <h3 class="timeline-title">BTS SIO SISR</h3>
+                        <p class="timeline-description">1ère année à Elysées Apprentissage, 2ème année à IAAG Paris 19ème — Solutions d'Infrastructure, Systèmes et Réseaux.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Entreprise -->
+    <section id="entreprise">
+        <div class="container">
+            <h2 class="section-title">Mon entreprise</h2>
+            <div class="company-content">
+                <div style="text-align:center;">
+                    <div class="company-logo">
+                        <img src="images/Borne+telephone.png" alt="Logo Loadz">
+                    </div>
+                    <h3 class="company-name">Loadz</h3>
+                </div>
+                <p>Je travaille chez Loadz, une régie publicitaire qui installe des bornes de recharge pour téléphones intégrant de la publicité. L'entreprise a récemment ouvert un pôle informatique afin de proposer des solutions technologiques aux restaurants, cafés et hôtels partenaires. J'y participe à la mise en place et à la gestion des infrastructures informatiques.</p>
+            </div>
+            <div class="read-more">
+                <a href="https://loadz.io/">En savoir plus</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projets -->
+    <section id="projets" class="projects">
+        <div class="container">
+            <h2 class="section-title">Projets</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/Apparthotel.png" alt="Infrastructure appart hôtel">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Projet 1 - Infrastructure pour appart hôtel</h3>
+                        <p class="project-description">Conception et mise en place d'une infrastructure réseau complète (Wi-Fi, VLANs, sécurité, serveurs) pour un appart hôtel afin de répondre aux besoins des clients et du personnel.</p>
+                    </div>
+                    <div class="read-more">
+                        <a href="projet1.html">En savoir plus</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/virtualisation.jpg" alt="Virtualisation">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Projet 2 - Virtualisation</h3>
+                        <p class="project-description">Création et gestion d'un environnement virtualisé avec VMware/Hyper-V pour la mise en place de serveurs.</p>
+                    </div>
+                    <div class="read-more">
+                        <a href="projet2.html">En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Veilles -->
+    <section id="veilles">
+        <div class="container">
+            <h2 class="section-title">Veilles Technologiques</h2>
+            <div class="veille-cards">
+                <div class="veille-card">
+                    <div class="veille-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Cybersécurité</h3>
+                    <p>J'effectue une veille régulière sur les menaces en cybersécurité afin de suivre l'évolution des risques comme les ransomwares et les attaques par phishing. Cette veille m'a permis de mieux comprendre les enjeux de sécurité pour les entreprises et l'importance des solutions comme le MFA et le chiffrement des données.</p>
+                    <div class="veille-tools">
+                        <span class="tool-tag">Google Alertes</span>
+                        <span class="tool-tag">Cert-FR</span>
+                        <span class="tool-tag">ZATAZ</span>
+                    </div>
+                </div>
+                <div class="veille-card">
+                    <div class="veille-icon"><i class="fas fa-cloud"></i></div>
+                    <h3>Virtualisation et Cloud</h3>
+                    <p>La virtualisation et le cloud computing sont essentiels pour optimiser les infrastructures. Je me tiens informé des dernières évolutions de VMware, Proxmox, Azure et AWS grâce à des outils comme Google Alertes, IT-Connect et des forums comme Reddit r/sysadmin.</p>
+                    <div class="veille-tools">
+                        <span class="tool-tag">Google Alertes</span>
+                        <span class="tool-tag">IT-Connect</span>
+                        <span class="tool-tag">Reddit r/sysadmin</span>
+                    </div>
+                </div>
+            </div>
+            <div class="read-more">
+                <a href="Veille.html">En savoir plus</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-content">
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nom</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Envoyer le message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2025 BOUTEBA Marwane - BTS SIO SISR | <a href="mailto:marwane.bouteba@exemple.com" style="color:white;">marwane.bouteba@exemple.com</a></p>
+        </div>
+    </footer>
+
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("YOUR_PUBLIC_KEY");
+        })();
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+                .then(() => {
+                    alert('Message envoyé avec succès !');
+                    this.reset();
+                }, (error) => {
+                    alert('Erreur : ' + error.text);
+                });
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(a.getAttribute('href'));
+                if(target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            nav.style.boxShadow = window.scrollY > 100 ? '0 4px 20px rgba(0,0,0,.15)' : '0 2px 10px rgba(0,0,0,.1)';
+        });
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.style.animation = 'fadeInUp .8s ease forwards';
+            });
+        }, { threshold: .1 });
+        document.querySelectorAll('.project-card, .veille-card, .school-card, .timeline-item, .skill-category').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
